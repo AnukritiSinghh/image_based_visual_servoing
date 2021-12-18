@@ -43,9 +43,6 @@ The following code performs multiple operations to compute **visual servoing tas
 * Compute velocities to minimize error between current positions of blobs and their desired positions
 * Stop the velocity publishing and computation when error has dropped below a threshold.
 
-## Pseudocode
-
-![Base QR](ressources/pseudocodepython.png)
 
 ## Execution
 

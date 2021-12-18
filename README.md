@@ -1,6 +1,6 @@
 Image Based Visual Servoing
 
-1. # ROS - Visual Servoing IBVS with Blobs Detection
+ # 1. ROS - Visual Servoing IBVS with Blobs Detection
 
 **Table-of-contents**
 
@@ -62,6 +62,5 @@ Running the minimal launch and the 3Dsensor launch from ros.
 1 : `roslaunch turtlebot_gazebo turtlebot_world.launch world_file:='/world/NameofWorld.world' `
 2: `rosrun IBVS_PointsBased IBVS_PointsBased_gazebo` or `rosrun project_vs IBVS_PointsBased_gazebo`
 
-
-2. # Simple use of visp with ros-gazebo
+# 2. Simple use of visp with ros-gazebo
 

@@ -1,4 +1,6 @@
-# ROS - Visual Servoing IBVS with Blobs Detection
+Image Based Visual Servoing
+
+1. # ROS - Visual Servoing IBVS with Blobs Detection
 
 **Table-of-contents**
 
@@ -10,17 +12,17 @@ More description is given in the subsections.
 
 ## Dependencies
 
-The following project has been tested with **Ubuntu 14.04 LTS**.
+The following project is being tested with **Ubuntu 18.04 LTS**
 
-Since this project concerns ROS Indigo, following libraries are needed:
+Following libraries are needed:
 
-* ROS Indigo - `sudo apt-get install ros-indigo-desktop-full`
-* Gazebo Simulation - `sudo apt-get install ros-indigo-gazebo-ros-pkgs ros-indigo-gazebo-ros-control`
-* Turtlebot for Gazebo - `sudo apt-get install ros-indigo-turtlebot_gazebo`
+* ROS Melodic - `sudo apt-get install ros-melodic-desktop-full`
+* Gazebo Simulation - `sudo apt-get install ros-melodic-gazebo-ros-pkgs ros-melodic-gazebo-ros-control`
+* Turtlebot for Gazebo in Melodic - `sudo apt-get install ros-melodic-turtlebot3` (useful link https://answers.ros.org/question/305162/has-the-turtlebot-simulator-been-released-for-melodic-version/) 
 
 The development part has been performed using CPP and ViSP:
 
-* ROS Indigo ViSP - `sudo apt-get install ros-indigo-visp-*`
+* ROS Melodic ViSP - `sudo apt-get install ros-melodic-visp-*`
 * ViSP - `sudo apt-get install libvisp-dev libvisp-doc visp-images-data`
 
 ## Getting your marker in the Gazebo world:
@@ -33,7 +35,7 @@ The 'qr.world' file available in 'world' folder contains a Gazebo world with a p
 
 ## Process
 
-The following code performs multiple operations to compute **visual servoing task** using **ROS Indigo** and a **Turlebot**.
+The following code performs multiple operations to compute **visual servoing task** using **ROS Melodic** and a **Turlebot**.
 
 * Extraction of image from the Kinect ( and dependant topic) .
 * Manual initialization of blobs to be tracked 
@@ -56,33 +58,10 @@ Running the minimal launch and the 3Dsensor launch from ros.
 
 ### Running PointsBased IBVS
 
-* Reality : `rosrun IBVS_PointsBased IBVS_PointsBased`
 * Simulation : 
 1 : `roslaunch turtlebot_gazebo turtlebot_world.launch world_file:='/world/NameofWorld.world' `
-2: `rosrun IBVS_PointsBased IBVS_PointsBased_gazebo`
+2: `rosrun IBVS_PointsBased IBVS_PointsBased_gazebo` or `rosrun project_vs IBVS_PointsBased_gazebo`
 
-## Provided in the repository
 
-### launch
-
-This folder contains all the launch files to run the code in real world or Gazebo.
-
-### scripts
-
-This folder contains all the cpp files to run the code in real world or Gazebo.
-
-### model
-
-This folder contains all the files concerning the template to track.
-
-### world
-
-This folder contains the Gazebo world to launch the code under simulation.
-
-## Materials
-
-#### Real View
-[![Watch the video](ressources/ibvs1.png)](https://www.youtube.com/watch?v=bUESEUgN75Q)
-#### Computer View
-[![Watch the video](ressources/ibvs2.png)](https://www.youtube.com/watch?v=yDBamqhc0QQ)
+2. # Simple use of visp with ros-gazebo
 

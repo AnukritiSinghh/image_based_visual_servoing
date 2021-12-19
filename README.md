@@ -63,3 +63,5 @@ Running the minimal launch and the 3Dsensor launch from ros.
 
 # 2. Simple use of visp with ros-gazebo
 
+Install ros-melodic-visp package from Synaptic.
+

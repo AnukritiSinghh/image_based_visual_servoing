@@ -64,5 +64,6 @@ Running the minimal launch and the 3Dsensor launch from ros.
 # 2. Simple use of visp with ros-gazebo
 
 * Install ros-melodic-visp package from Synaptic.
-* Installation of pioneer model https://github.com/SD-Robot-Vision/PioneerModel or https://github.com/mario-serna/pioneer_p3dx_model
+* Installation of pioneer model https://github.com/SD-Robot-Vision/PioneerModel or https://github.com/mario-serna/pioneer_p3dx_model 
+(Link for p2od files https://github.com/allenh1/p2os) 
 

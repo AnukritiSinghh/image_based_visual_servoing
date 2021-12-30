@@ -32,7 +32,7 @@ Paste the 'marker0' folder in 'gazeboResources' into your gazebo resources direc
 
 Usually, this is a hidden folder in your 'home' directory, named '.gazebo'. Paste the 'marker0' folder inside '.gazebo/models/'. In your Gazebo, you'll now be able to 'insert' marker0, check the insert pane!
 
-The 'qr.world' file available in 'world' folder contains a Gazebo world with a pattern containing 5 dots. 
+The 'qr.world' file available in 'world' folder contains a Gazebo world with a pattern containing 5 dots. Copy this world file in your turtlebot3 folder.
 
 
 ## Process

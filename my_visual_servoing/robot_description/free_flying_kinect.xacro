@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="free_flying_camera">
+
+<!-- robot constants -->
+<xacro:property name="mass" value="0" /> <!-- arbitrary value for mass -->
+<xacro:property name="camera_link" value="0.1" /> <!-- Size of square 'camera' box -->
+<xacro:property name="mass" value="0" /> <!-- arbitrary value for mass -->
+<xacro:property name="width" value="0.2" /> <!-- Square dimensions (widthxwidth) of beams -->
+<xacro:property name="height1" value="0.2" /> <!-- Link 1 -->
+<xacro:property name="PI" value="3.1415926535897931"/>
+<xacro:property name="x" value="-2"/>
+<xacro:property name="y" value="0"/>
+<xacro:property name="z" value="0"/>
+<xacro:property name="r" value="0"/>
+<xacro:property name="p" value="0"/>
+<xacro:property name="y" value="0"/>
+
+
+
+<!-- Import all Gazebo-customization elements, including Gazebo colors -->
+<xacro:include filename="$(find visual_servoing)/robot_description/free_flying_kinect.gazebo" />
+
+
+<!--link name="world"/-->
+<!--link name="base_footprint"/-->
+<!--link name="link0"/>
+
+
+  <joint name="fixed" type="fixed">
+    <parent link="link0"/>
+    <child link="link1"/>
+  </joint-->
+ 
+  <!-- Base Link -->
+  <link name="link1">
+    <collision>
+      <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${y}"/>
+      <geometry>
+	<box size="${width} ${width} ${height1}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${y}"/>
+      <geometry>
+	<box size="${width} ${width} ${height1}"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${y}"/>
+      <mass value="${mass}"/>
+      <inertia
+	  ixx="${mass / 12.0 * (width*width + height1*height1)}" ixy="0.0" ixz="0.0"
+	  iyy="${mass / 12.0 * (height1*height1 + width*width)}" iyz="0.0"
+	  izz="${mass / 12.0 * (width*width + width*width)}"/>
+    </inertial>
+  </link>
+
+
+ <joint name="camera_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="${x+width} ${y} ${z}" rpy="${r} ${p} ${y}"/>
+    <parent link="link1"/>
+    <child link="camera_link"/>
+  </joint>
+
+
+ <!-- Camera -->
+  <link name="camera_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+	<box size="${camera_link} ${camera_link} ${camera_link}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+	<box size="${camera_link} ${camera_link} ${camera_link}"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <!-- generate an optical frame http://www.ros.org/reps/rep-0103.html#suffix-frames
+      so that ros and opencv can operate on the camera frame correctly -->
+  <joint name="camera_optical_joint" type="fixed">
+    <!-- these values have to be these values otherwise the gazebo camera image
+        won't be aligned properly with the frame it is supposedly originating from -->
+    <origin xyz="0.1 0 0" rpy="${pi/2} 0 ${-pi/2}"/>
+    <parent link="camera_link"/>
+    <child link="camera_link_optical"/>
+  </joint>
+
+  <link name="camera_link_optical">
+  </link>
+
+
+</robot>
+

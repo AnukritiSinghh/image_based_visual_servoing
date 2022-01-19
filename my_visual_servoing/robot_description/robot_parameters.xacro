@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:property name="link_00_name" value="base_link" />
+  <xacro:property name="link_01_name" value="link_01" />
+  <xacro:property name="link_02_name" value="link_02" />
+  <xacro:property name="link_03_name" value="link_03" />
+  <xacro:property name="link_04_name" value="link_04" />
+  <xacro:property name="link_05_name" value="link_05" />
+  <xacro:property name="camera_link" value="0.05" /> <!-- Size of square 'camera' box -->
+</robot>

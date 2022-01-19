@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <world name="default">
+    <gui>
+      <camera name="user_default">
+        <pose>-13.7307 -0.39601 3.34394 0 0.196 0.094816</pose>
+      </camera>
+    </gui>    
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+       <pose>0 0 0 1.57 0 -1.57</pose> 
+      <uri>model://planar_target_aruco</uri>
+    </include>
+    
+  </world>
+</sdf>

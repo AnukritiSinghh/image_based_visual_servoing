@@ -1,0 +1,174 @@
+<?xml version="1.0" ?>
+
+<robot name="mrm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  
+  <!-- BGN - Include -->
+  <xacro:include filename="$(find visual_servoing)/robot_description/robot_parameters.xacro" />
+  <xacro:include filename="$(find visual_servoing)/robot_description/links_joints.xacro" />
+  <!-- END - Include -->
+  
+  <!-- BGN - Robot description -->
+  <m_link_box name="${link_00_name}"
+              origin_rpy="0 0 0" origin_xyz="0 0 0"
+              mass="1024"
+              ixx="170.667" ixy="0" ixz="0"
+              iyy="170.667" iyz="0"
+              izz="170.667"
+              size="1 1 1" />
+              
+  <m_joint name="${link_00_name}__${link_01_name}" type="revolute"
+           axis_xyz="0 0 1"
+           origin_rpy="0 0 0" origin_xyz="0 0 0.5"
+           parent="base_link" child="link_01"
+           limit_e="1000" limit_l="-3.14" limit_u="3.14" limit_v="0.5" />
+           
+  <m_link_cylinder name="${link_01_name}"
+              origin_rpy="0 0 0" origin_xyz="0 0 0.2"
+              mass="157.633"
+              ixx="13.235" ixy="0" ixz="0"
+              iyy="13.235" iyz="0"
+              izz="9.655"
+              length="0.4" radius="0.35" />
+              
+  <m_joint name="${link_01_name}__${link_02_name}" type="revolute"
+           axis_xyz="0 1 0"
+           origin_rpy="0 0 0" origin_xyz="0 0 0.4"
+           parent="link_01" child="link_02"
+           limit_e="1000" limit_l="0" limit_u="0.5" limit_v="0.5" />
+           
+  <m_link_cylinder name="${link_02_name}"
+              origin_rpy="0 0 0" origin_xyz="0 0 0.4"
+              mass="57.906"
+              ixx="12.679" ixy="0" ixz="0"
+              iyy="12.679" iyz="0"
+              izz="0.651"
+              radius="0.15" length="0.8" />
+              
+  <m_joint name="${link_02_name}__${link_03_name}" type="revolute"
+           axis_xyz="0 1 0"
+           origin_rpy="0 0 0" origin_xyz="0 0 0.8"
+           parent="link_02" child="link_03"
+           limit_e="1000" limit_l="0" limit_u="0.75" limit_v="0.5" />
+           
+  <m_link_cylinder name="${link_03_name}"
+              origin_rpy="0 0 0" origin_xyz="0 0 0.4"
+              mass="57.906"
+              ixx="12.679" ixy="0" ixz="0"
+              iyy="12.679" iyz="0"
+              izz="0.651"
+              radius="0.15" length="0.8" />
+              
+  <m_joint name="${link_03_name}__${link_04_name}" type="revolute"
+           axis_xyz="0 1 0"
+           origin_rpy="0 0 0" origin_xyz="0 0 0.8"
+           parent="link_03" child="link_04"
+           limit_e="1000" limit_l="0" limit_u="0.75" limit_v="0.5" />
+           
+  <m_link_cylinder name="${link_04_name}"
+              origin_rpy="0 0 0" origin_xyz="0 0 0.4"
+              mass="57.906"
+              ixx="12.679" ixy="0" ixz="0"
+              iyy="12.679" iyz="0"
+              izz="0.651"
+              radius="0.15" length="0.8" />
+              
+  <m_joint name="${link_04_name}__${link_05_name}" type="revolute"
+           axis_xyz="0 0 1"
+           origin_rpy="0 0 0" origin_xyz="0 0 0.8"
+           parent="link_04" child="link_05"
+           limit_e="1000" limit_l="-3.14" limit_u="3.14" limit_v="0.5" />
+           
+  <m_link_cylinder name="${link_05_name}"
+              origin_rpy="0 0 0" origin_xyz="0 0 0.125"
+              mass="18.056"
+              ixx="0.479" ixy="0" ixz="0"
+              iyy="0.479" iyz="0"
+              izz="0.204"
+              radius="0.15" length="0.25" />
+              
+  <!-- END - Robot description -->
+  <gazebo reference="base_link">
+   <gravity>0</gravity>
+  </gazebo>
+  <!-- Camera -->
+  <joint name="camera_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="${camera_link} 0.15 0.7" rpy="0 0 0"/>
+    <parent link="link_04"/>
+    <child link="camera_link"/>
+  </joint>
+
+  <!-- Camera -->
+  <link name="camera_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="${camera_link} ${camera_link} ${camera_link}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="${camera_link} ${camera_link} ${camera_link}"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+  
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    </plugin>
+  </gazebo>
+  <!-- Camera -->
+  <gazebo reference="camera_link">
+          <gravity>0</gravity>
+    <sensor type="camera" name="camera1">
+      <update_rate>30.0</update_rate>
+      <camera name="head">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise is sampled independently per pixel on each frame.
+               That pixel's noise value is added to each of its color
+               channels, which at that point lie in the range [0,1]. -->
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>mrm/camera1</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_link_optical</frameName>
+        <hackBaseline>0.0</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+        <CxPrime>0</CxPrime>
+        <Cx>0.0</Cx>
+        <Cy>0.0</Cy>
+        <focalLength>0.0</focalLength>
+      </plugin>
+    </sensor>
+  </gazebo>
+</robot>

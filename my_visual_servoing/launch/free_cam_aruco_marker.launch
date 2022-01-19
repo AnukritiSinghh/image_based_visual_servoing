@@ -1,0 +1,43 @@
+<launch>
+  <env name="GAZEBO_MODEL_PATH" value="$(find visual_servoing)/models:$(optenv GAZEBO_MODEL_PATH)" />
+  
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find visual_servoing)/worlds/aruco.world"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="recording" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+     
+    <!-- Generate/Load robot description file -->
+    <!-- Load the URDF into the ROS Parameter Server -->
+    <param name="robot_description" command="$(find xacro)/xacro.py --inorder '$(find visual_servoing)/robot_description/mrm.xacro'" />
+    <arg name="x" default="0"/>
+    <arg name="y" default="0"/>
+    <arg name="z" default="0.5"/>
+    <!-- Spawn urdf into Gazebo -->
+    <node name="spawn_robot" pkg="gazebo_ros" type="spawn_model" output="screen" respawn="false" args="-urdf -param robot_description -model mrm -x $(arg x) -y $(arg y) -z $(arg z)"  />
+
+    <!-- Load controllers -->
+    <rosparam command="load" file="$(find visual_servoing)/config/joints.yaml" />
+        
+    <!-- Controllers -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner"
+        respawn="false" output="screen" ns="/mrm"
+        args="--namespace=/mrm
+        joint_state_controller
+        joint1_position_controller
+        joint2_position_controller
+        joint3_position_controller
+        joint4_position_controller
+        joint5_position_controller
+        --timeout 60">
+    </node>
+        
+    <!-- rqt -->
+    <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure" />
+    <node name="rqt_publisher" pkg="rqt_publisher" type="rqt_publisher" />
+  
+</launch>

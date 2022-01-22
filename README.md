@@ -1,4 +1,6 @@
-Image Based Visual Servoing
+#Image Based Visual Servoing
+
+This repo has different folders contaning different ways of doing visual servoing with different robots. The end goal is perform IBVS on aerial manipulator. (The approaches are not restricted to Gazebo sim)
 
  # 1. ROS - Visual Servoing IBVS with Blobs Detection
  

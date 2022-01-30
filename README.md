@@ -2,6 +2,8 @@
 
 This repo has different folders contaning different ways of doing visual servoing with different robots. The end goal is perform IBVS on aerial manipulator. (The approaches are not restricted to Gazebo sim)
 
+LATEST - Implementing IBVS with franks robot in CoppeliaSim using the visp_ros package providd by inria.
+
  # 1. ROS - Visual Servoing IBVS with Blobs Detection
  
 **For IBVS_PointBased**

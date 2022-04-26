@@ -5,4 +5,4 @@
   2. in another terminal: 'roscd visual_servoing/scripts/python/examples/'
   3. 'python2 ibvs_aruco.py'
 
-Huge help from repo: https://github.com/Haritpandya/visual-servoing-toolkit
+

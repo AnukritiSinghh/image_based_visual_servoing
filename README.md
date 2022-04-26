@@ -4,7 +4,7 @@ This repo has different folders contaning different ways of doing visual servoin
 
 LATEST - Implementing IBVS with franks robot in CoppeliaSim using the visp_ros package providd by inria.
 
-For video demonstration - please download the webmd files in your device 
+For video demonstration - please download the webm files in your device 
 
  # 1. ROS - Visual Servoing IBVS with Blobs Detection
  
